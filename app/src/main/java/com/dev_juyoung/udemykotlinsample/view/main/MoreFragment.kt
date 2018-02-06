@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dev_juyoung.udemykotlinsample.R
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_etc.*
 
 /**
  * Created by juyounglee on 2018. 2. 6..
