@@ -13,11 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val homeFragment: HomeFragment by lazy {
-        HomeFragment().apply {
-            arguments = Bundle().apply {
-                putInt(HomeFragment.KEY_TITLE, R.string.title_home)
-            }
-        }
+        HomeFragment()
     }
     private val cameraFragment: CameraFragment by lazy {
         CameraFragment().apply {
