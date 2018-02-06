@@ -1,4 +1,4 @@
-package com.dev_juyoung.udemykotlinsample.view.main
+package com.dev_juyoung.udemykotlinsample.view.main.camera
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_etc.*
  * Created by juyounglee on 2018. 2. 6..
  */
 
-class MoreFragment : Fragment() {
+class CameraFragment : Fragment() {
     companion object {
         val KEY_TITLE = "key-title"
     }

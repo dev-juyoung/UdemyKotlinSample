@@ -5,6 +5,9 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.dev_juyoung.udemykotlinsample.R
 import com.dev_juyoung.udemykotlinsample.util.replace
+import com.dev_juyoung.udemykotlinsample.view.main.camera.CameraFragment
+import com.dev_juyoung.udemykotlinsample.view.main.home.HomeFragment
+import com.dev_juyoung.udemykotlinsample.view.main.more.MoreFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
