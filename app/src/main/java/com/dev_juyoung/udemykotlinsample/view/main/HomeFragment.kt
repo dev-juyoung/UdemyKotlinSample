@@ -17,13 +17,11 @@ class HomeFragment : Fragment() {
         val KEY_TITLE = "key-title"
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View? = inflater?.inflate(R.layout.fragment_home, container, false)
-        return view
-    }
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater?.inflate(R.layout.fragment_home, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        message.text = arguments.getInt(KEY_TITLE).toString()
+        message.setText(arguments?.getInt(KEY_TITLE) ?: 0)
     }
 }
