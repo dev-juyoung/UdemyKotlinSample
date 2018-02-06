@@ -5,10 +5,13 @@ package com.dev_juyoung.udemykotlinsample.view.main.home
  */
 interface HomeContract {
     interface View {
+        fun showImage(imageName: String)
+        fun hideProgress()
+        fun showProgress()
 
     }
 
     interface Presenter {
-        
+        fun loadImage()
     }
 }
