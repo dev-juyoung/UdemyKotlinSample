@@ -1,23 +1,31 @@
 package com.dev_juyoung.udemykotlinsample.view.main.home
 
 import android.os.AsyncTask
+import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.source.image.ImageDataSource
 import com.dev_juyoung.udemykotlinsample.data.source.image.ImageRepository
 import com.dev_juyoung.udemykotlinsample.util.random
+import com.dev_juyoung.udemykotlinsample.view.main.home.adapter.HomeAdapterContract
 
 /**
  * Created by juyounglee on 2018. 2. 6..
  */
 class HomePresenter(
         val view: HomeContract.View,
-        private val imageRepository: ImageRepository
+        private val imageRepository: ImageRepository,
+        private val adapterView: HomeAdapterContract.View,
+        private val adapterModel: HomeAdapterContract.Model
 ) : HomeContract.Presenter {
+
     override fun loadImage() {
-        ImageAsyncTask(view, imageRepository).execute()
+        ImageAsyncTask(view, imageRepository, adapterView, adapterModel).execute()
     }
 
     class ImageAsyncTask(
             val view: HomeContract.View,
-            val imageRepository: ImageRepository
+            private val imageRepository: ImageRepository,
+            private val adapterView: HomeAdapterContract.View,
+            private val adapterModel: HomeAdapterContract.Model
     ) : AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
             Thread.sleep(1000)
@@ -25,18 +33,20 @@ class HomePresenter(
 
         override fun onPreExecute() {
             super.onPreExecute()
-
             view.showProgress()
         }
 
         override fun onPostExecute(result: Unit?) {
             super.onPostExecute(result)
 
-            view.hideProgress()
-
-            imageRepository.loadImageFileName {
-                view.showImage(it)
-            }
+            imageRepository.loadImages(10, object : ImageDataSource.LoadImagesCallback {
+                override fun onLoaded(images: List<ImageData>) {
+                    // adapterModel.addItems(images)
+                    adapterModel.updateItems(images)
+                    adapterView.updateView()
+                    view.hideProgress()
+                }
+            })
         }
     }
 }
