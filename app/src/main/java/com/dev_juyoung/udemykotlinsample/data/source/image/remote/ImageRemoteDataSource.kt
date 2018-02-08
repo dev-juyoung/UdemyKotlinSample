@@ -1,13 +1,14 @@
-package com.dev_juyoung.udemykotlinsample.data.source.image
+package com.dev_juyoung.udemykotlinsample.data.source.image.remote
 
 import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.source.image.ImageDataSource
 import com.dev_juyoung.udemykotlinsample.util.random
 
 /**
  * Created by juyounglee on 2018. 2. 8..
  */
 
-class ImageRemoteData : ImageDataSource {
+class ImageRemoteDataSource : ImageDataSource {
 
     private val imageList = listOf(
             "https://github.com/taehwandev/Kotlin-Udemy-Sample/blob/No42-Image-load-library/app/src/main/res/drawable/sample_01.png?raw=true",

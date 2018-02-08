@@ -1,12 +1,13 @@
-package com.dev_juyoung.udemykotlinsample.data.source.image
+package com.dev_juyoung.udemykotlinsample.data.source.image.local
 
 import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.source.image.ImageDataSource
 import com.dev_juyoung.udemykotlinsample.util.random
 
 /**
  * Created by juyounglee on 2018. 2. 7..
  */
-class ImageLocalData : ImageDataSource {
+class ImageLocalDataSource : ImageDataSource {
 
 
     override fun loadImages(size: Int, callback: ImageDataSource.LoadImagesCallback) {
