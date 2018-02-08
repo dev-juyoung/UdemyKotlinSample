@@ -11,7 +11,7 @@ class ImageLocalData : ImageDataSource {
         val data = mutableListOf<ImageData>()
 
         for (index in 1..size) {
-            val fileName = String.format("sample_%02d", (1..10).random())
+            val fileName = String.format("sample_%02d", (1..10).random() + 1)
             data.add(ImageData(fileName, fileName))
         }
 
