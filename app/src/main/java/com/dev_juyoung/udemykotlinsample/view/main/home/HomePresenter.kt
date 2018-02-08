@@ -1,6 +1,8 @@
 package com.dev_juyoung.udemykotlinsample.view.main.home
 
 import android.os.AsyncTask
+import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.source.image.ImageDataSource
 import com.dev_juyoung.udemykotlinsample.data.source.image.ImageRepository
 import com.dev_juyoung.udemykotlinsample.util.random
 
@@ -17,7 +19,7 @@ class HomePresenter(
 
     class ImageAsyncTask(
             val view: HomeContract.View,
-            val imageRepository: ImageRepository
+            private val imageRepository: ImageRepository
     ) : AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
             Thread.sleep(1000)
@@ -34,9 +36,11 @@ class HomePresenter(
 
             view.hideProgress()
 
-            imageRepository.loadImageFileName {
-                view.showImage(it)
-            }
+            imageRepository.loadImages(10, object : ImageDataSource.LoadImagesCallback {
+                override fun onLoaded(images: List<ImageData>) {
+                    view.showImage(images[0].url)
+                }
+            })
         }
     }
 }
