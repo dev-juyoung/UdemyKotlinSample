@@ -7,6 +7,8 @@ import com.dev_juyoung.udemykotlinsample.util.random
  * Created by juyounglee on 2018. 2. 7..
  */
 class ImageLocalData : ImageDataSource {
+
+
     override fun loadImages(size: Int, callback: ImageDataSource.LoadImagesCallback) {
         val data = mutableListOf<ImageData>()
 

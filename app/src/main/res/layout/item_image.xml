@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.dev_juyoung.udemykotlinsample.widget.SquareImageView
+    <com.dev_juyoung.udemykotlinsample.view.widget.SquareImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
