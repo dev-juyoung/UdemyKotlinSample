@@ -31,8 +31,8 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initLayout()
         presenter.loadImage()
+        initLayout()
     }
 
     private fun initLayout() {

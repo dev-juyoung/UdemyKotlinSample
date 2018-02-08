@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_image.view.*
 class ImageViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     fun onBind(item: ImageData) {
         itemView.run {
-            imageView.setImageResource(resources.getIdentifier(item.url, "drawable", context.packageName))
+            imageView.load(item.url)
             textView.text = item.name
         }
     }
