@@ -17,7 +17,7 @@ import retrofit2.Response
 object FlickrRemoteDataSource : FlickrDataSource {
     override fun getResent(callback: FlickrDataSource.LoadRecentCallback) {
         val flickrService: FlickrService = createService(FlickrService::class.java)
-        val request: Call<FlickrResentData> = flickrService.getFlickrRecent(BuildConfig.FLICKR_API_KEY, 1, 30)
+        val request: Call<FlickrResentData> = flickrService.getFlickrRecent(1, 30)
         request.enqueue(object : Callback<FlickrResentData> {
             override fun onResponse(call: Call<FlickrResentData>?, response: Response<FlickrResentData>?) {
                 val succeed = response?.isSuccessful ?: false
