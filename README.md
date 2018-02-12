@@ -15,5 +15,8 @@ Branches
 * course-31-presenter
 * course-32-model
 * course-34-recyclerview
+* course-35-image-load-lib
+* course-36-retrofit
+* course-37-recyclerview-retrofit
 
  [udemy]: https://www.udemy.com/the_next_android_kotlin
