@@ -8,7 +8,11 @@ import kotlinx.android.synthetic.main.item_image.view.*
 /**
  * Created by juyounglee on 2018. 2. 8..
  */
-class FlickrPhotoViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+class FlickrPhotoViewHolder(itemView: View?, onItemClicked: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    init {
+        itemView?.setOnClickListener { onItemClicked(adapterPosition) }
+    }
+
     fun onBind(item: Photo) {
         itemView.run {
             imageView.load(item.getPhotoURI())

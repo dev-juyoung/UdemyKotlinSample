@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.dev_juyoung.udemykotlinsample.R
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrRepository
+import com.dev_juyoung.udemykotlinsample.view.main.detail.PhotoDetailBottomSheet
 import com.dev_juyoung.udemykotlinsample.view.main.home.adapter.HomeRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -89,5 +90,9 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showMessage(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showDetailInfo(photoId: String) {
+        PhotoDetailBottomSheet.create(photoId).show(activity.supportFragmentManager, "PhotoDetailBottomSheet")
     }
 }
