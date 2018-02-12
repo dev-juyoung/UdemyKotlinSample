@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dev_juyoung.udemykotlinsample.R
-import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.schme.Photo
 
 /**
  * Created by juyounglee on 2018. 2. 8..
@@ -15,27 +15,27 @@ class HomeRecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerV
         HomeAdapterContract.View,
         HomeAdapterContract.Model {
 
-    private var data = mutableListOf<ImageData>()
+    private var data = mutableListOf<Photo>()
 
     override fun updateView() {
         notifyDataSetChanged()
     }
 
-    override fun addItems(images: List<ImageData>) {
-        data.addAll(images)
+    override fun addItems(photos: List<Photo>) {
+        data.addAll(photos)
     }
 
-    override fun updateItems(images: List<ImageData>) {
-        data = images as MutableList<ImageData>
+    override fun updateItems(photos: List<Photo>) {
+        data = photos as MutableList<Photo>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.item_image, parent, false)
-        return ImageViewHolder(view)
+        return FlickrPhotoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        val viewHolder = holder as? ImageViewHolder
+        val viewHolder = holder as? FlickrPhotoViewHolder
         viewHolder?.onBind(data[position])
     }
 

@@ -12,14 +12,26 @@ object FlickrRepository : FlickrDataSource {
         FlickrRemoteDataSource
     }
 
-    override fun getResent(callback: FlickrDataSource.LoadRecentCallback) {
-        remoteDataSource.getResent(object : FlickrDataSource.LoadRecentCallback {
+    override fun getResent(callback: FlickrDataSource.LoadFlickrPhotoCallback) {
+        remoteDataSource.getResent(object : FlickrDataSource.LoadFlickrPhotoCallback {
             override fun onSuccess(data: FlickrPhotoData) {
                 callback.onSuccess(data)
             }
 
-            override fun onFailure(errorMessage: String) {
-                callback.onFailure(errorMessage)
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
+            }
+        })
+    }
+
+    override fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: FlickrDataSource.LoadFlickrPhotoCallback) {
+        remoteDataSource.getSearchPhotos(searchKeyword, requestPage, object : FlickrDataSource.LoadFlickrPhotoCallback {
+            override fun onSuccess(data: FlickrPhotoData) {
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
             }
         })
     }

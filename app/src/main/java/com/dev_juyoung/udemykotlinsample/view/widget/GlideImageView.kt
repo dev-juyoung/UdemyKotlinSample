@@ -16,7 +16,7 @@ open class GlideImageView @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attr, defStyleAttr) {
 
-    fun load(url: String?, @DrawableRes placeholderResId: Int = R.drawable.sample_01) {
+    fun load(url: String?, @DrawableRes placeholderResId: Int = R.drawable.loading) {
         GlideApp.with(this)
                 .load(url)
                 .placeholder(placeholderResId)

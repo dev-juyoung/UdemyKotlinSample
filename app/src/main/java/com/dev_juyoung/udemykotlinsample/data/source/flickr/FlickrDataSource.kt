@@ -7,10 +7,12 @@ import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoData
  */
 interface FlickrDataSource {
 
-    interface LoadRecentCallback {
+    interface LoadFlickrPhotoCallback {
         fun onSuccess(data: FlickrPhotoData)
-        fun onFailure(errorMessage: String)
+        fun onFailure(message: String)
     }
 
-    fun getResent(callback: LoadRecentCallback)
+    fun getResent(callback: LoadFlickrPhotoCallback)
+
+    fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: LoadFlickrPhotoCallback)
 }
