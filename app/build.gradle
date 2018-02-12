@@ -23,8 +23,9 @@ android {
     buildTypes {
         debug {
             minifyEnabled true
-            useProguard false
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles 'proguard-common.pro'
             proguardFiles 'proguard-glide.pro'
             proguardFiles 'proguard-okhttp.pro'
             proguardFiles 'proguard-retrofit.pro'
@@ -36,6 +37,7 @@ android {
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles 'proguard-common.pro'
             proguardFiles 'proguard-glide.pro'
             proguardFiles 'proguard-okhttp.pro'
             proguardFiles 'proguard-retrofit.pro'
