@@ -24,15 +24,23 @@ android {
         debug {
             minifyEnabled true
             useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles 'proguard-rules.pro'
+            proguardFiles 'proguard-common.pro'
+            proguardFiles 'proguard-retrofit.pro'
+            proguardFiles 'proguard-okhttp.pro'
+
             buildConfigField "String", "FLICKR_API_KEY", properties.getProperty('flickrApiKey')
         }
         release {
             minifyEnabled true
             useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles 'proguard-rules.pro'
+            proguardFiles 'proguard-common.pro'
+            proguardFiles 'proguard-retrofit.pro'
+            proguardFiles 'proguard-okhttp.pro'
+
             buildConfigField "String", "FLICKR_API_KEY", properties.getProperty('flickrApiKey')
         }
     }
