@@ -1,14 +1,26 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 ext {
-    flickrApiKey = properties.getProperty('flickrApiKey')
+    // Compile Configuration.
+    compileSdkVersion = 26
+    targetSdkVersion = 26
+    minSdkVersion = 21
+
+    // App Dependencies.
+    supportLibraryVersion = '26.1.0'
+    glideVersion = '4.6.1'
+    retrofitVersion = '2.3.0'
+    okhttpVersion = '3.9.1'
+
+    // App Test Dependencies.
+    junitVersion = '4.12'
+    runnerVersion = '1.0.1'
+    espressoVersion = '3.0.1'
 }
 
 buildscript {
     ext.kotlin_version = '1.1.51'
+
     repositories {
         google()
         jcenter()
