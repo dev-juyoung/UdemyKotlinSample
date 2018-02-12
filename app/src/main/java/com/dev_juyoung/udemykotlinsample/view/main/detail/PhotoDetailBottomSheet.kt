@@ -8,13 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dev_juyoung.udemykotlinsample.R
+import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrRepository
 import kotlinx.android.synthetic.main.dialog_photo_detail.*
 
 /**
  * Created by juyounglee on 2018. 2. 12..
  */
 
-class PhotoDetailBottomSheet : BottomSheetDialogFragment() {
+class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.View {
     companion object {
         const val KEY_PHOTO_ID = "KEY_PHOTO_ID"
 
@@ -23,6 +24,10 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment() {
                 putString(KEY_PHOTO_ID, photoId)
             }
         }
+    }
+
+    private val presenter: PhotoDetailPresenter by lazy {
+        PhotoDetailPresenter(this@PhotoDetailBottomSheet, FlickrRepository)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -64,5 +69,7 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment() {
 //        }
 
         photoIdTextView.text = arguments.getString(KEY_PHOTO_ID)
+
+        presenter.loadPhotoInfo(arguments.getString(KEY_PHOTO_ID))
     }
 }
