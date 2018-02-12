@@ -1,7 +1,7 @@
 package com.dev_juyoung.udemykotlinsample.data.network
 
 import com.dev_juyoung.udemykotlinsample.BuildConfig
-import com.dev_juyoung.udemykotlinsample.data.schme.FlickrResentData
+import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,12 +11,23 @@ import retrofit2.http.Query
  */
 
 interface FlickrService {
-    @GET("?method=flickr.photos.getRecent&format=json&nojsoncallback=1")
+    @GET("?method=flickr.photos.getRecent")
     fun getFlickrRecent(
             @Query("page") page: Int,
             @Query("per_page") perPage: Int,
             @Query("api_key") apiKey: String = BuildConfig.FLICKR_API_KEY,
             @Query("format") outputFormat: String = "json",
             @Query("nojsoncallback") nojsoncallback: Int = 1
-    ): Call<FlickrResentData>
+    ): Call<FlickrPhotoData>
+
+    @GET("?method=flickr.photos.search")
+    fun getFlickrSearchPhotos(
+            @Query("text") searchKeyword: String,
+            @Query("safe_search") safeSearch: Int = 1,
+            @Query("page") page: Int = 1,
+            @Query("per_page") perPage: Int = 30,
+            @Query("api_key") apiKey: String = BuildConfig.FLICKR_API_KEY,
+            @Query("format") outputFormat: String = "json",
+            @Query("nojsoncallback") nojsoncallback: Int = 1
+    ) : Call<FlickrPhotoData>
 }

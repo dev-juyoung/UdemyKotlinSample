@@ -1,14 +1,8 @@
 package com.dev_juyoung.udemykotlinsample.view.main.home
 
-import android.os.AsyncTask
-import android.util.Log
-import com.dev_juyoung.udemykotlinsample.data.schme.FlickrResentData
-import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoData
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrDataSource
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrRepository
-import com.dev_juyoung.udemykotlinsample.data.source.image.ImageDataSource
-import com.dev_juyoung.udemykotlinsample.data.source.image.ImageRepository
-import com.dev_juyoung.udemykotlinsample.util.random
 import com.dev_juyoung.udemykotlinsample.view.main.home.adapter.HomeAdapterContract
 
 /**
@@ -16,54 +10,42 @@ import com.dev_juyoung.udemykotlinsample.view.main.home.adapter.HomeAdapterContr
  */
 class HomePresenter(
         val view: HomeContract.View,
-        private val imageRepository: ImageRepository,
+        private val flickrRepository: FlickrRepository,
         private val adapterView: HomeAdapterContract.View,
-        private val adapterModel: HomeAdapterContract.Model,
-        private val flickrRepository: FlickrRepository
+        private val adapterModel: HomeAdapterContract.Model
 ) : HomeContract.Presenter {
+    var isLoading: Boolean = false
+    var requestPage: Int = 0
 
-    override fun testFlickr() {
-        flickrRepository.getResent(object : FlickrDataSource.LoadRecentCallback {
-            override fun onSuccess(data: FlickrResentData) {
-                Log.d("PRESENTER", "data: $data")
+    override fun loadFlickrPhotos(isUpdate: Boolean) {
+        isLoading = true
+        view.showProgress()
+
+        flickrRepository.getSearchPhotos("night view", requestPage, object : FlickrDataSource.LoadFlickrPhotoCallback {
+            override fun onSuccess(data: FlickrPhotoData) {
+                view.hideProgress()
+                isLoading = false
+
+                if (data.stat.contentEquals("ok")) {
+                    if (!isUpdate) {
+                        adapterModel.addItems(data.photos.photo)
+                    } else {
+                        adapterModel.updateItems(data.photos.photo)
+                    }
+
+                    adapterView.updateView()
+
+                    requestPage++
+                } else {
+                    view.showMessage("stat: ${data.stat}, message: ${data.message}")
+                }
             }
 
-            override fun onFailure(errorMessage: String) {
-                Log.e("PRESENTER", "error: $errorMessage")
+            override fun onFailure(message: String) {
+                view.hideProgress()
+                view.showMessage(message)
+                isLoading = false
             }
         })
-    }
-
-    override fun loadImage() {
-        ImageAsyncTask(view, imageRepository, adapterView, adapterModel).execute()
-    }
-
-    class ImageAsyncTask(
-            val view: HomeContract.View,
-            private val imageRepository: ImageRepository,
-            private val adapterView: HomeAdapterContract.View,
-            private val adapterModel: HomeAdapterContract.Model
-    ) : AsyncTask<Unit, Unit, Unit>() {
-        override fun doInBackground(vararg params: Unit?) {
-            Thread.sleep(1000)
-        }
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            view.showProgress()
-        }
-
-        override fun onPostExecute(result: Unit?) {
-            super.onPostExecute(result)
-
-            imageRepository.loadImages(10, object : ImageDataSource.LoadImagesCallback {
-                override fun onLoaded(images: List<ImageData>) {
-                    // adapterModel.addItems(images)
-                    adapterModel.updateItems(images)
-                    adapterView.updateView()
-                    view.hideProgress()
-                }
-            })
-        }
     }
 }

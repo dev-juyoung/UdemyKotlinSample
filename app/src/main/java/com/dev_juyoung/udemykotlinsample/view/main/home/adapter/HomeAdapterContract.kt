@@ -1,6 +1,6 @@
 package com.dev_juyoung.udemykotlinsample.view.main.home.adapter
 
-import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
+import com.dev_juyoung.udemykotlinsample.data.schme.Photo
 
 /**
  * Created by juyounglee on 2018. 2. 8..
@@ -11,7 +11,7 @@ interface HomeAdapterContract {
     }
 
     interface Model {
-        fun addItems(images: List<ImageData>)
-        fun updateItems(images: List<ImageData>)
+        fun addItems(photos: List<Photo>)
+        fun updateItems(photos: List<Photo>)
     }
 }
