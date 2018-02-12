@@ -16,26 +16,26 @@ import retrofit2.Response
 
 object FlickrRemoteDataSource : FlickrDataSource {
     override fun getResent(callback: FlickrDataSource.LoadRecentCallback) {
-        val flickrService: FlickrService = createService(FlickrService::class.java)
-        val request: Call<FlickrResentData> = flickrService.getFlickrRecent(1, 30)
+        val service: FlickrService = createService(FlickrService::class.java)
+        val request: Call<FlickrResentData> = service.getFlickrRecent(1, 30)
         request.enqueue(object : Callback<FlickrResentData> {
             override fun onResponse(call: Call<FlickrResentData>?, response: Response<FlickrResentData>?) {
                 val succeed = response?.isSuccessful ?: false
                 val data = response?.body()
 
                 if (succeed) {
-                    if (data != null && data.stat.contentEquals("ok")) {
+                    if (data != null) {
                         callback.onSuccess(data)
                     } else {
-                        callback.onFailure("데이터 없음.")
+                        callback.onFailure("통신은 성공했으나, data가 없음.")
                     }
                 } else {
-                    callback.onFailure("status 200 아닌 에러.")
+                    callback.onFailure("Response Code 200 이 외의 코드로 인한 에러 처리.")
                 }
             }
 
             override fun onFailure(call: Call<FlickrResentData>?, t: Throwable?) {
-                callback.onFailure("flickr 서버 장애(?)")
+                callback.onFailure("Flickr 서버 장애 등의 문제로 인한 통신 실패.")
             }
         })
     }
