@@ -1,7 +1,5 @@
 package com.dev_juyoung.udemykotlinsample.data.source.flickr.remote
 
-import android.util.Log
-import com.dev_juyoung.udemykotlinsample.BuildConfig
 import com.dev_juyoung.udemykotlinsample.data.network.FlickrService
 import com.dev_juyoung.udemykotlinsample.data.network.createService
 import com.dev_juyoung.udemykotlinsample.data.schme.FlickrResentData

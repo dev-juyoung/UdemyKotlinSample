@@ -12,10 +12,6 @@ object FlickrRepository : FlickrDataSource {
         FlickrRemoteDataSource
     }
 
-    init {
-        println("repository instance 생성됨.")
-    }
-
     override fun getResent(callback: FlickrDataSource.LoadRecentCallback) {
         remoteDataSource.getResent(object : FlickrDataSource.LoadRecentCallback {
             override fun onSuccess(data: FlickrResentData) {
