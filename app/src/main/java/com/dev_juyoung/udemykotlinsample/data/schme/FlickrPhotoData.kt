@@ -1,36 +1,35 @@
 package com.dev_juyoung.udemykotlinsample.data.schme
 
+import com.google.gson.annotations.SerializedName
+
+
 /**
  * Created by juyounglee on 2018. 2. 12..
  */
-
 data class FlickrPhotoData(
-        val photos: Photos,
-        val stat: String,
-        val code: Int,
-        val message: String
+		@SerializedName("photos") val photos: Photos,
+		@SerializedName("stat") val stat: String
 )
 
 data class Photos(
-        val page: Int,
-        val pages: Int,
-        val perpage: Int,
-        val total: String,
-        val photo: List<Photo>
+		@SerializedName("page") val page: Int,
+		@SerializedName("pages") val pages: Int,
+		@SerializedName("perpage") val perpage: Int,
+		@SerializedName("total") val total: String,
+		@SerializedName("photo") val photo: List<Photo>
 )
 
 data class Photo(
-        val id: String,
-        val owner: String,
-        val secret: String,
-        val server: String,
-        val farm: Int,
-        val title: String,
-        val ispublic: Int,
-        val isfriend: Int,
-        val isfamliy: Int
+        @SerializedName("id") val id: String,
+        @SerializedName("owner") val owner: String,
+        @SerializedName("secret") val secret: String,
+        @SerializedName("server") val server: String,
+        @SerializedName("farm") val farm: Int,
+        @SerializedName("title") val title: String,
+        @SerializedName("ispublic") val ispublic: Int,
+        @SerializedName("isfriend") val isfriend: Int,
+        @SerializedName("isfamily") val isfamily: Int
 ) {
-
     /**
      * TODO: 아래의 규칙으로 이미지 URL 요청하여야 하며, 해당 샘플에서는 가장 기본 방법으로 요청함.
      * https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg

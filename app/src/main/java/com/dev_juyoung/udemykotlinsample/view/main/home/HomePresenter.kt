@@ -18,34 +18,38 @@ class HomePresenter(
     var requestPage: Int = 0
 
     override fun loadFlickrPhotos(isUpdate: Boolean) {
-        isLoading = true
+        this.isLoading = true
         view.showProgress()
 
-        flickrRepository.getSearchPhotos("night view", requestPage, object : FlickrDataSource.LoadFlickrPhotoCallback {
-            override fun onSuccess(data: FlickrPhotoData) {
-                view.hideProgress()
-                isLoading = false
+        flickrRepository.getSearchPhotos(
+                "night view",
+                this.requestPage,
+                object : FlickrDataSource.LoadFlickrPhotoCallback {
+                    override fun onSuccess(data: FlickrPhotoData) {
+                        view.hideProgress()
+                        this@HomePresenter.isLoading = false
 
-                if (data.stat.contentEquals("ok")) {
-                    if (!isUpdate) {
-                        adapterModel.addItems(data.photos.photo)
-                    } else {
-                        adapterModel.updateItems(data.photos.photo)
+                        if (data.stat.contentEquals("ok")) {
+                            if (!isUpdate) {
+                                adapterModel.addItems(data.photos.photo)
+                            } else {
+                                adapterModel.updateItems(data.photos.photo)
+                            }
+
+                            adapterView.updateView()
+
+                            this@HomePresenter.requestPage++
+                        } else {
+                            view.showMessage("stat: ${data.stat}")
+                        }
                     }
 
-                    adapterView.updateView()
-
-                    requestPage++
-                } else {
-                    view.showMessage("stat: ${data.stat}, message: ${data.message}")
+                    override fun onFailure(message: String) {
+                        view.hideProgress()
+                        view.showMessage(message)
+                        this@HomePresenter.isLoading = false
+                    }
                 }
-            }
-
-            override fun onFailure(message: String) {
-                view.hideProgress()
-                view.showMessage(message)
-                isLoading = false
-            }
-        })
+        )
     }
 }

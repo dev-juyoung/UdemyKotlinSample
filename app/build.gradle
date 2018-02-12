@@ -25,10 +25,10 @@ android {
             minifyEnabled true
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
-            proguardFiles 'proguard-rules.pro'
-            proguardFiles 'proguard-common.pro'
-            proguardFiles 'proguard-retrofit.pro'
+            proguardFiles 'proguard-glide.pro'
             proguardFiles 'proguard-okhttp.pro'
+            proguardFiles 'proguard-retrofit.pro'
+            // proguardFiles 'proguard-debug.pro'
 
             buildConfigField "String", "FLICKR_API_KEY", properties.getProperty('flickrApiKey')
         }
@@ -36,10 +36,9 @@ android {
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
-            proguardFiles 'proguard-rules.pro'
-            proguardFiles 'proguard-common.pro'
-            proguardFiles 'proguard-retrofit.pro'
+            proguardFiles 'proguard-glide.pro'
             proguardFiles 'proguard-okhttp.pro'
+            proguardFiles 'proguard-retrofit.pro'
 
             buildConfigField "String", "FLICKR_API_KEY", properties.getProperty('flickrApiKey')
         }
