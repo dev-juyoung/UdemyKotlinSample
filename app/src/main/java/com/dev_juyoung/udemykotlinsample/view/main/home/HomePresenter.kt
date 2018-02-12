@@ -2,13 +2,12 @@ package com.dev_juyoung.udemykotlinsample.view.main.home
 
 import android.os.AsyncTask
 import android.util.Log
-import com.dev_juyoung.udemykotlinsample.data.schme.FlickrResentData
+import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoData
 import com.dev_juyoung.udemykotlinsample.data.schme.ImageData
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrDataSource
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrRepository
 import com.dev_juyoung.udemykotlinsample.data.source.image.ImageDataSource
 import com.dev_juyoung.udemykotlinsample.data.source.image.ImageRepository
-import com.dev_juyoung.udemykotlinsample.util.random
 import com.dev_juyoung.udemykotlinsample.view.main.home.adapter.HomeAdapterContract
 
 /**
@@ -24,7 +23,7 @@ class HomePresenter(
 
     override fun testFlickr() {
         flickrRepository.getResent(object : FlickrDataSource.LoadRecentCallback {
-            override fun onSuccess(data: FlickrResentData) {
+            override fun onSuccess(data: FlickrPhotoData) {
                 Log.d("PRESENTER", "data: $data")
             }
 

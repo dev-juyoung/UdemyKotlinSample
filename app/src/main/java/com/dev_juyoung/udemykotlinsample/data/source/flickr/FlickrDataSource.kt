@@ -1,6 +1,6 @@
 package com.dev_juyoung.udemykotlinsample.data.source.flickr
 
-import com.dev_juyoung.udemykotlinsample.data.schme.FlickrResentData
+import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoData
 
 /**
  * Created by juyounglee on 2018. 2. 9..
@@ -8,7 +8,7 @@ import com.dev_juyoung.udemykotlinsample.data.schme.FlickrResentData
 interface FlickrDataSource {
 
     interface LoadRecentCallback {
-        fun onSuccess(data: FlickrResentData)
+        fun onSuccess(data: FlickrPhotoData)
         fun onFailure(errorMessage: String)
     }
 

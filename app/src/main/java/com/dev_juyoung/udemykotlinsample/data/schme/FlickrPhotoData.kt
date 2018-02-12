@@ -1,10 +1,10 @@
 package com.dev_juyoung.udemykotlinsample.data.schme
 
 /**
- * Created by juyounglee on 2018. 2. 9..
+ * Created by juyounglee on 2018. 2. 12..
  */
 
-data class FlickrResentData(
+data class FlickrPhotoData(
         val photos: Photos,
         val stat: String,
         val code: Int,
