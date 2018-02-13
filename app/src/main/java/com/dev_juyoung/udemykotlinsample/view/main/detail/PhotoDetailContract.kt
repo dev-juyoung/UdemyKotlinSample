@@ -6,7 +6,9 @@ package com.dev_juyoung.udemykotlinsample.view.main.detail
 
 interface PhotoDetailContract {
     interface View {
-
+        fun updateItem(photoURL: String)
+        fun updateToolbarItem(ownerImageURL: String, ownerName: String)
+        fun dismissDueToError(message: String)
     }
 
     interface Presenter {

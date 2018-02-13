@@ -1,6 +1,7 @@
 package com.dev_juyoung.udemykotlinsample.data.source.flickr
 
 import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoData
+import com.dev_juyoung.udemykotlinsample.data.schme.FlickrPhotoInfoData
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.remote.FlickrRemoteDataSource
 
 /**
@@ -27,6 +28,18 @@ object FlickrRepository : FlickrDataSource {
     override fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: FlickrDataSource.LoadFlickrPhotoCallback) {
         remoteDataSource.getSearchPhotos(searchKeyword, requestPage, object : FlickrDataSource.LoadFlickrPhotoCallback {
             override fun onSuccess(data: FlickrPhotoData) {
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
+            }
+        })
+    }
+
+    override fun getPhotoDetailInfo(photoId: String, callback: FlickrDataSource.LoadFlickrPhotoInfoCallback) {
+        remoteDataSource.getPhotoDetailInfo(photoId, object : FlickrDataSource.LoadFlickrPhotoInfoCallback {
+            override fun onSuccess(data: FlickrPhotoInfoData) {
                 callback.onSuccess(data)
             }
 
