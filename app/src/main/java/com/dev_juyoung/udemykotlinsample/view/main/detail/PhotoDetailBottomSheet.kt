@@ -65,7 +65,7 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
         }
 
         imageWeb.setOnClickListener {
-            
+
         }
 
         presenter.loadPhotoInfo(arguments.getString(KEY_PHOTO_ID))
