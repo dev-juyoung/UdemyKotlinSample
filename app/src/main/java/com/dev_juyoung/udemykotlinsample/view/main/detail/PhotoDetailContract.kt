@@ -14,5 +14,6 @@ interface PhotoDetailContract {
 
     interface Presenter {
         fun loadPhotoInfo(photoId: String)
+        fun loadPhotoURL()
     }
 }

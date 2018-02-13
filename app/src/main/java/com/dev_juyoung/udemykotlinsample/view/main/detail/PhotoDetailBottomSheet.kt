@@ -1,9 +1,12 @@
 package com.dev_juyoung.udemykotlinsample.view.main.detail
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +68,7 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
         }
 
         imageWeb.setOnClickListener {
-
+            presenter.loadPhotoURL()
         }
 
         presenter.loadPhotoInfo(arguments.getString(KEY_PHOTO_ID))
@@ -86,6 +89,15 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
     }
 
     override fun showWebPage(url: String) {
+        if (url.isEmpty()) {
+            context.toast("요청할 URL이 비어 있음.")
+            return
+        }
 
+        CustomTabsIntent.Builder().apply {
+            setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        }.build().run {
+            launchUrl(context, Uri.parse(url))
+        }
     }
 }

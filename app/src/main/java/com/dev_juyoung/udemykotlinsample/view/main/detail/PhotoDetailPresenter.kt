@@ -30,4 +30,9 @@ class PhotoDetailPresenter(
             }
         })
     }
+
+    override fun loadPhotoURL() {
+        val url = flickrRepository.cachedPhotoInfo?.photo?.urls?.url?.firstOrNull()?.content ?: ""
+        view.showWebPage(url)
+    }
 }
