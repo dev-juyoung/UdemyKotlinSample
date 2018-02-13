@@ -80,7 +80,7 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
         imagePhoto.load(photoURL)
     }
 
-    override fun dismissDueToError(message: String) {
+    override fun onError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         dismiss()
     }

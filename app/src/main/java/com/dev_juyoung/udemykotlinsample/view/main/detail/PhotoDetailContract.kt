@@ -8,7 +8,7 @@ interface PhotoDetailContract {
     interface View {
         fun updateItem(photoURL: String)
         fun updateToolbarItem(ownerImageURL: String, ownerName: String)
-        fun dismissDueToError(message: String)
+        fun onError(message: String)
     }
 
     interface Presenter {
