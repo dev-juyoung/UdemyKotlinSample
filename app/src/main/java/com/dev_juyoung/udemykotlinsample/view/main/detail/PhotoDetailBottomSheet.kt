@@ -7,9 +7,9 @@ import android.support.design.widget.BottomSheetDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.dev_juyoung.udemykotlinsample.R
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrRepository
+import com.dev_juyoung.udemykotlinsample.util.toast
 import kotlinx.android.synthetic.main.dialog_photo_detail_info.*
 
 /**
@@ -81,7 +81,11 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
     }
 
     override fun onError(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        context.toast(message)
         dismiss()
+    }
+
+    override fun showWebPage(url: String) {
+
     }
 }

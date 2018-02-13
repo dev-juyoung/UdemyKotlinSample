@@ -9,6 +9,7 @@ interface PhotoDetailContract {
         fun updateItem(photoURL: String)
         fun updateToolbarItem(ownerImageURL: String, ownerName: String)
         fun onError(message: String)
+        fun showWebPage(url: String)
     }
 
     interface Presenter {
