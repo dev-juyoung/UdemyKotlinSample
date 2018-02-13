@@ -15,6 +15,10 @@ fun AppCompatActivity.replace(@IdRes frameId: Int, fragment: Fragment, tag: Stri
     supportFragmentManager.beginTransaction().replace(frameId, fragment, tag).commit()
 }
 
+fun AppCompatActivity.isInstalledApp(packageName: String): Boolean {
+    return packageManager.getLaunchIntentForPackage(packageName) != null
+}
+
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
