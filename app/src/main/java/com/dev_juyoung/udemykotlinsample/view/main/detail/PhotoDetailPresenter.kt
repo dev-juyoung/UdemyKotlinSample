@@ -21,13 +21,18 @@ class PhotoDetailPresenter(
                         view.updateItem(it.getPhotoURI())
                     }
                 } else {
-                    view.dismissDueToError("Flickr API의 결과가 Failed.")
+                    view.onError("Flickr API의 결과가 Failed.")
                 }
             }
 
             override fun onFailure(message: String) {
-                view.dismissDueToError(message)
+                view.onError(message)
             }
         })
+    }
+
+    override fun loadPhotoURL() {
+        val url = flickrRepository.cachedPhotoInfo?.photo?.urls?.url?.firstOrNull()?.content ?: ""
+        view.showWebPage(url)
     }
 }

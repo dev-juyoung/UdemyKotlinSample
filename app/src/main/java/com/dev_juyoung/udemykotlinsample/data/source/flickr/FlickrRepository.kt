@@ -9,6 +9,8 @@ import com.dev_juyoung.udemykotlinsample.data.source.flickr.remote.FlickrRemoteD
  */
 
 object FlickrRepository : FlickrDataSource {
+    var cachedPhotoInfo: FlickrPhotoInfoData? = null
+
     private val remoteDataSource: FlickrRemoteDataSource by lazy {
         FlickrRemoteDataSource
     }
@@ -38,8 +40,13 @@ object FlickrRepository : FlickrDataSource {
     }
 
     override fun getPhotoDetailInfo(photoId: String, callback: FlickrDataSource.LoadFlickrPhotoInfoCallback) {
+        if (cachedPhotoInfo != null) cachedPhotoInfo = null
+
         remoteDataSource.getPhotoDetailInfo(photoId, object : FlickrDataSource.LoadFlickrPhotoInfoCallback {
             override fun onSuccess(data: FlickrPhotoInfoData) {
+                // 상세데이터 조회 성공 후, Repository에 캐시.
+                cachedPhotoInfo = data.takeIf { it.stat.contentEquals("ok") } ?: null
+
                 callback.onSuccess(data)
             }
 

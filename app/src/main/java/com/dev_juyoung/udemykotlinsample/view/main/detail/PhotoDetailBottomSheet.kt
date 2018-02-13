@@ -1,15 +1,21 @@
 package com.dev_juyoung.udemykotlinsample.view.main.detail
 
 import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.dev_juyoung.udemykotlinsample.R
 import com.dev_juyoung.udemykotlinsample.data.source.flickr.FlickrRepository
+import com.dev_juyoung.udemykotlinsample.util.isInstalledApp
+import com.dev_juyoung.udemykotlinsample.util.toast
 import kotlinx.android.synthetic.main.dialog_photo_detail_info.*
 
 /**
@@ -65,7 +71,7 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
         }
 
         imageWeb.setOnClickListener {
-
+            presenter.loadPhotoURL()
         }
 
         presenter.loadPhotoInfo(arguments.getString(KEY_PHOTO_ID))
@@ -80,8 +86,32 @@ class PhotoDetailBottomSheet : BottomSheetDialogFragment(), PhotoDetailContract.
         imagePhoto.load(photoURL)
     }
 
-    override fun dismissDueToError(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    override fun onError(message: String) {
+        context.toast(message)
         dismiss()
+    }
+
+    override fun showWebPage(url: String) {
+        if (url.isEmpty()) {
+            context.toast("요청할 URL이 비어 있음.")
+            return
+        }
+
+        // Chrome Custom Tabs의 경우,
+        // Chrome이 설치가 되어 있지 않으면 동작하지 않으므로, Chrome 설치여부를 확인한다.
+        val chromeIsInstalled = (activity as AppCompatActivity).isInstalledApp("com.android.chrome")
+
+        // Chrome이 설치 되어 있지 않다면, 외부 브라우저로 연결하도록 처리.
+        if (!chromeIsInstalled) {
+            val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(webIntent)
+            return
+        }
+
+        CustomTabsIntent.Builder().apply {
+            setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        }.build().run {
+            launchUrl(context, Uri.parse(url))
+        }
     }
 }

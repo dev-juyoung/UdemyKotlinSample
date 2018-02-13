@@ -55,6 +55,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:customtabs:$rootProject.ext.supportLibraryVersion"
 
     // TODO: Activity 추가 시, 중복 설정 되는 부분으로 인해 ConstraintLayout은 정적으로 설정.
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
