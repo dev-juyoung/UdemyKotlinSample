@@ -17,6 +17,12 @@ class HomePresenter(
     var isLoading: Boolean = false
     var requestPage: Int = 0
 
+    init {
+        adapterView.onItemClicked = {
+            view.showDetailInfo(adapterModel.getItem(it).id)
+        }
+    }
+
     override fun loadFlickrPhotos(isUpdate: Boolean) {
         this.isLoading = true
         view.showProgress()

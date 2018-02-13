@@ -8,6 +8,7 @@ interface HomeContract {
         fun hideProgress()
         fun showProgress()
         fun showMessage(message: String)
+        fun showDetailInfo(photoId: String)
     }
 
     interface Presenter {

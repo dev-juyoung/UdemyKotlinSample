@@ -16,6 +16,7 @@ class HomeRecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerV
         HomeAdapterContract.Model {
 
     private var data = mutableListOf<Photo>()
+    override lateinit var onItemClicked: (Int) -> Unit
 
     override fun updateView() {
         notifyDataSetChanged()
@@ -29,9 +30,13 @@ class HomeRecyclerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerV
         data = photos as MutableList<Photo>
     }
 
+    override fun getItem(position: Int): Photo {
+        return data[position]
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.item_image, parent, false)
-        return FlickrPhotoViewHolder(view)
+        return FlickrPhotoViewHolder(view, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
