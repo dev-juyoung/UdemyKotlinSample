@@ -12,7 +12,7 @@ class PhotoDetailPresenter(
         private val flickrRepository: FlickrRepository
 ) : PhotoDetailContract.Presenter {
     override fun loadPhotoInfo(photoId: String) {
-        flickrRepository.getPhotoDetailInfo(photoId, object : FlickrDataSource.LoadFlickrPhotoInfoCallback {
+        flickrRepository.getPhotoDetailInfo(photoId, object : FlickrDataSource.LoadFlickrCallback<FlickrPhotoInfoData> {
             override fun onSuccess(data: FlickrPhotoInfoData) {
                 if (data.stat.contentEquals("ok")) {
                     data.photo.let {

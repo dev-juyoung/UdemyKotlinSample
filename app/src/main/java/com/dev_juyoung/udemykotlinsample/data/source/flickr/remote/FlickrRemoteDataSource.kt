@@ -16,7 +16,7 @@ import retrofit2.Response
 object FlickrRemoteDataSource : FlickrDataSource {
     private val service: FlickrService = createService(FlickrService::class.java)
 
-    override fun getResent(callback: FlickrDataSource.LoadFlickrPhotoCallback) {
+    override fun getResent(callback: FlickrDataSource.LoadFlickrCallback<FlickrPhotoData>) {
         val request: Call<FlickrPhotoData> = service.getFlickrRecent(1, 30)
 
         request.enqueue(object : Callback<FlickrPhotoData> {
@@ -41,7 +41,7 @@ object FlickrRemoteDataSource : FlickrDataSource {
         })
     }
 
-    override fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: FlickrDataSource.LoadFlickrPhotoCallback) {
+    override fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: FlickrDataSource.LoadFlickrCallback<FlickrPhotoData>) {
         val request: Call<FlickrPhotoData> = service.getFlickrSearchPhotos(searchKeyword, page = requestPage)
 
         request.enqueue(object : Callback<FlickrPhotoData> {
@@ -66,7 +66,7 @@ object FlickrRemoteDataSource : FlickrDataSource {
         })
     }
 
-    override fun getPhotoDetailInfo(photoId: String, callback: FlickrDataSource.LoadFlickrPhotoInfoCallback) {
+    override fun getPhotoDetailInfo(photoId: String, callback: FlickrDataSource.LoadFlickrCallback<FlickrPhotoInfoData>) {
         val request: Call<FlickrPhotoInfoData> = service.getFlickrPhotoDetailInfo(photoId)
 
         request.enqueue(object : Callback<FlickrPhotoInfoData> {

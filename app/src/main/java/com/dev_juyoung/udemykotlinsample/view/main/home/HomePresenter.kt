@@ -30,7 +30,7 @@ class HomePresenter(
         flickrRepository.getSearchPhotos(
                 "night view",
                 this.requestPage,
-                object : FlickrDataSource.LoadFlickrPhotoCallback {
+                object : FlickrDataSource.LoadFlickrCallback<FlickrPhotoData> {
                     override fun onSuccess(data: FlickrPhotoData) {
                         view.hideProgress()
                         this@HomePresenter.isLoading = false
