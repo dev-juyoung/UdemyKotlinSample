@@ -15,8 +15,8 @@ object FlickrRepository : FlickrDataSource {
         FlickrRemoteDataSource
     }
 
-    override fun getResent(callback: FlickrDataSource.LoadFlickrPhotoCallback) {
-        remoteDataSource.getResent(object : FlickrDataSource.LoadFlickrPhotoCallback {
+    override fun getResent(callback: FlickrDataSource.LoadFlickrCallback<FlickrPhotoData>) {
+        remoteDataSource.getResent(object : FlickrDataSource.LoadFlickrCallback<FlickrPhotoData> {
             override fun onSuccess(data: FlickrPhotoData) {
                 callback.onSuccess(data)
             }
@@ -27,8 +27,8 @@ object FlickrRepository : FlickrDataSource {
         })
     }
 
-    override fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: FlickrDataSource.LoadFlickrPhotoCallback) {
-        remoteDataSource.getSearchPhotos(searchKeyword, requestPage, object : FlickrDataSource.LoadFlickrPhotoCallback {
+    override fun getSearchPhotos(searchKeyword: String, requestPage: Int, callback: FlickrDataSource.LoadFlickrCallback<FlickrPhotoData>) {
+        remoteDataSource.getSearchPhotos(searchKeyword, requestPage, object : FlickrDataSource.LoadFlickrCallback<FlickrPhotoData> {
             override fun onSuccess(data: FlickrPhotoData) {
                 callback.onSuccess(data)
             }
@@ -39,10 +39,10 @@ object FlickrRepository : FlickrDataSource {
         })
     }
 
-    override fun getPhotoDetailInfo(photoId: String, callback: FlickrDataSource.LoadFlickrPhotoInfoCallback) {
+    override fun getPhotoDetailInfo(photoId: String, callback: FlickrDataSource.LoadFlickrCallback<FlickrPhotoInfoData>) {
         if (cachedPhotoInfo != null) cachedPhotoInfo = null
 
-        remoteDataSource.getPhotoDetailInfo(photoId, object : FlickrDataSource.LoadFlickrPhotoInfoCallback {
+        remoteDataSource.getPhotoDetailInfo(photoId, object : FlickrDataSource.LoadFlickrCallback<FlickrPhotoInfoData> {
             override fun onSuccess(data: FlickrPhotoInfoData) {
                 // 상세데이터 조회 성공 후, Repository에 캐시.
                 cachedPhotoInfo = data.takeIf { it.stat.contentEquals("ok") } ?: null
